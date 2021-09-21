@@ -1,0 +1,159 @@
+
+body{
+    background-color: white;
+}
+.navbar-brand{
+    font-weight: bold;
+}
+.sidebar{
+    min-width: 5rem;
+}
+.menubar .menu{
+    cursor: pointer;
+}
+.menu{
+    border-radius: 2rem;
+}
+.menu a{
+    padding-left: 1rem;
+}
+.menubar{
+    font-weight: bold;
+}
+.menubar input{
+    background-color: white;
+}
+.menubar input{
+    font-weight: bold;
+    min-width: 7rem;
+}
+.menubar .menu:hover, .menu:hover{
+    color: blue;
+    background-color: rgb(233, 246, 250);
+}
+.menubar .selected{
+    background-color: rgb(233, 246, 250);
+}
+.statbar{
+    min-width: 10rem;
+    line-height: 2rem;
+}
+.statbar h3{
+    font-size: 1rem;
+    line-height: 2rem;
+}
+.header .tabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.content h5{
+    font-weight: bold;
+}
+.tabs .tab{
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 2rem;
+}
+.tabs .tab:hover{
+    background-color: rgb(236, 236, 236);
+    transition: all 100ms linear;
+}
+.tabs .all, .tabs .sorted{
+    border-bottom: 1px solid blue;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+input, textarea{
+    padding: 0 .5rem;
+}
+a, a:hover{
+    text-decoration: none;
+    color: black;
+}
+.question{
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0px 10px 15px 1px lightgray;
+}
+.user{
+    margin-top: 1rem;
+}
+.username{
+    font-weight: bold;
+}
+.profile-pic{
+    box-sizing: border-box;
+    width: 2rem;
+    border-radius: 2rem;
+    padding: 1px;
+}
+.accept .profile-pic{
+    border: 2px solid lightgreen;
+}
+.accept-info{
+    color: rgb(0, 218, 0);
+    font-size: .8rem;
+    font-weight: bold;
+    border-radius: 2rem;
+    line-height: 2rem;
+    background-color: rgb(211, 255, 211);
+}
+.profile .profile-pic{
+    width: 2.3rem;
+}
+.discussion-details h2, .discussion-details h3{
+    font-size: 1.2rem;
+}
+.answers .upper{
+    display: flex;
+    justify-content: space-between;
+}
+.answer{
+    border-bottom: 1px solid lightgray;
+}
+.vote{
+    color: transparent;
+    width: 1.5rem;
+    border: none;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+}
+.vote-count{
+    text-align: center;
+}
+.author{
+    text-align: start;
+    margin-left: .5rem;
+}
+#upvote{
+    background-image: url('/img/up-arrow.png');
+}
+#downvote{
+    background-image: url('/img/down-arrow.png');
+}
+.acc-form{
+    flex-direction: row;
+    align-items: center;
+}
+.solve-btn{
+    border-radius: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid black;
+    margin-right: .5rem;
+}
+.solved{
+    background-color: green;
+    /* background-image: url('/img/big-check-mark.png');
+    background-position: center;
+    background-size: cover; */
+}
+.acc-img{
+    width: 1.5rem;
+}
