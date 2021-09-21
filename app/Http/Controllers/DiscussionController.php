@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
@@ -16,38 +17,38 @@ class DiscussionController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
     public function index(){
-        $users = User::orderBy('reputation', 'desc')->get(['name','reputation']);
+        $users = DB::table('users')->orderBy('reputation', 'desc')->get(['name','reputation']);
         $categories = Category::all();
         if(request('category')){
-            $category = Category::where('name', request('category'))->get()->first();
-            $discussions = Discussion::join('users', 'users.id', '=', 'discussions.user_id')->where('category_id', $category->id)->select('discussions.*', 'users.name as user_name')->paginate(5);
+            $category = DB::table('categories')->where('name', request('category'))->get()->first();
+            $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('category_id', $category->id)->select('discussions.*', 'users.name as user_name')->paginate(5);
         }
         else{
-            $discussions = Discussion::join('users', 'users.id', '=', 'discussions.user_id')->select('discussions.*', 'users.name as user_name')->paginate(5);
+            $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->select('discussions.*', 'users.name as user_name')->paginate(5);
         }
         return view('discussions.index', ['discussions' => $discussions, 'categories' => $categories, 'users' => $users]);
     }
     public function show($slug){
         $author = false;
         $userid = Auth::id();
-        $categories = Category::all();
-        $discussion = Discussion::join('users', 'users.id', '=', 'discussions.user_id')->where('slug', $slug)->get(['discussions.*', 'users.name as user_name'])->first();
+        $categories = DB::table('categories')->get();
+        $discussion = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('slug', $slug)->get(['discussions.*', 'users.name as user_name'])->first();
         if($discussion->user_id == $userid){
             $author = true;
         }
-        $answers = Answer::join('users', 'users.id', '=', 'answers.user_id')->where('discussion_id', $discussion->id )->get(['answers.*', 'users.name as user_name']);
+        $answers = DB::table('answers')->join('users', 'users.id', '=', 'answers.user_id')->where('discussion_id', $discussion->id )->get(['answers.*', 'users.name as user_name']);
         return view('discussions.show', ['discussion' => $discussion, 'categories' => $categories, 'answers' => $answers, 'author' => $author]);
     }
     public function users(){
-        $categories = Category::all();
+        $categories = DB::table('categories')->get();
         $users = User::orderBy('reputation', 'desc')->get(['name','reputation']);
-        $discussions = Discussion::join('users', 'users.id', '=', 'discussions.user_id')->where('user_id', Auth::id())->get(['discussions.*', 'users.name as user_name']);
+        $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('user_id', Auth::id())->get(['discussions.*', 'users.name as user_name']);
         if(request('sort')){
          if(request('sort') == 'Solved'){
-            $discussions = Discussion::join('users', 'users.id', '=', 'discussions.user_id')->where(['user_id' => Auth::id(), 'solved' => true])->get(['discussions.*', 'users.name as user_name']);
+            $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where(['user_id' => Auth::id(), 'solved' => true])->get(['discussions.*', 'users.name as user_name']);
          }   
          else{
-            $discussions = Discussion::join('users', 'users.id', '=', 'discussions.user_id')->where(['user_id' => Auth::id(), 'solved' => false])->get(['discussions.*', 'users.name as user_name']);
+            $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where(['user_id' => Auth::id(), 'solved' => false])->get(['discussions.*', 'users.name as user_name']);
          }
         }
         return view('discussions.usershow', ['discussions' => $discussions, 'categories' => $categories, 'users' => $users]);

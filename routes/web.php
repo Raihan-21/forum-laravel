@@ -17,7 +17,7 @@ use App\Http\Controllers\AnswerController;
 
 Route::get('/', function(){
     return view('welcome');
-});
+})->name('hoempage');
 Route::get('/discussions', [DiscussionController::class, 'index']);
 Route::get('/discussions/create', [DiscussionController::class, 'create']);
 Route::get('/discussions/myquestions', [DiscussionController::class, 'users'])->middleware('auth');
