@@ -16,7 +16,7 @@
             <div class="user d-flex justify-content-between">
                 <div class="left d-flex">
                     <img src="/img/profile-user.png" class="profile-pic mr-2" alt="">
-                    <div>asked by <span class="username text-primary">{{$discussion->user_name}}</span></div>
+                    <a href="/profile/{{$discussion->user_id}}">asked by <span class="username text-primary">{{$discussion->user_name}}</span></a>
                 </div>
                 <div class="right">
                     

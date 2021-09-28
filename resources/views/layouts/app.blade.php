@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="d-flex flex-column">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -59,7 +59,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="/profile" class="dropdown-item">Profile</a>
+                                    <a href="/profile/{{Auth::id()}}" class="dropdown-item">Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

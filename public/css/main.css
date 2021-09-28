@@ -1,6 +1,49 @@
-
+html{
+    height: 100%;
+}
 body{
     background-color: white;
+    height: 100%;
+}
+/* Forms */
+.error{
+    color: rgb(255, 50, 50);
+}
+
+.home{
+    margin: auto;
+    background-image: url('/img/pexels-oleg-magni-2058128-edit_11zon.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 30rem;
+}
+#home{
+    display: block;
+}
+#homeheader{
+    font-size: 6rem;
+    font-weight: bold;
+    color: orangered;
+}
+.home > p, .home a{
+    color: white;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+.home > p{
+    margin-bottom: 0;
+}
+.home a{
+    padding: 1rem;
+    border-radius: 2rem;
+    background-color: orangered;
+}
+.animate{
+    opacity: 0;
+}
+.appear{
+    opacity: 1;
+    transition: all 100ms linear;
 }
 .navbar-brand{
     font-weight: bold;
@@ -103,9 +146,46 @@ a, a:hover{
     line-height: 2rem;
     background-color: rgb(211, 255, 211);
 }
+
+/* Profile */
+
 .profile .profile-pic{
-    width: 2.3rem;
+    height: 3rem;
+    width: 3rem;
 }
+.profile .username{
+    margin-right: 1.3rem;
+}
+.edit-img{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.stat{
+    font-size: 1rem;
+    border: 1px solid gray;
+    width: fit-content;
+    padding: 1rem;
+}
+.stat div{
+    text-align: center;
+}
+.profile .vote{
+    width: 1.5rem;
+}
+.profile span{
+    font-size: 1rem;
+}
+.profile label{
+    margin: 0;
+}
+.profile input {
+    margin-bottom: .5rem;
+    width: 50%;
+}
+.profile button{
+    width: 5rem;
+}
+/* Discussion Details */
 .discussion-details h2, .discussion-details h3{
     font-size: 1.2rem;
 }
@@ -156,4 +236,20 @@ a, a:hover{
 }
 .acc-img{
     width: 1.5rem;
+}
+footer{
+    background-color: black;
+    margin-top: 5rem;
+    /* margin-bottom: 0; */
+    color: white;
+    height: 6rem;
+}
+footer > *{
+    margin: 0;
+}
+footer h3{
+    /* line-height: 4rem; */
+}
+footer p{
+    color: gray;
 }

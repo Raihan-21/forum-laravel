@@ -28,7 +28,11 @@ Route::post('/discussions/{slug}', [DiscussionController::class, 'solved']);
 Route::post('/answers', [DiscussionController::class, 'answer']);
 Route::post('/answers/{id}', [AnswerController::class, 'accept']);
 Route::post('/answers/vote/{id}', [AnswerController::class, 'vote']);
-Route::get('/profile', [UserController::class, 'index']);
+Route::get('/profile/edit', [UserController::class, 'edit']);
+Route::post('/profile/edit', [UserController::class, 'update']);
+Route::get('/profile/edit/password', [UserController::class, 'editPass']);
+Route::post('/profile/edit/password', [UserController::class, 'updatePass']);
+Route::get('/profile/{id}', [UserController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

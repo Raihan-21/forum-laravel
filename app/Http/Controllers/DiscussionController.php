@@ -18,9 +18,9 @@ class DiscussionController extends Controller
     }
     public function index(){
         $users = DB::table('users')->orderBy('reputation', 'desc')->get(['name','reputation']);
-        $categories = Category::all();
+        $categories = DB::table('categories')->get();
         if(request('category')){
-            $category = DB::table('categories')->where('name', request('category'))->get()->first();
+            $category = DB::table('categories')->where('name', request('category'))->first();
             $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('category_id', $category->id)->select('discussions.*', 'users.name as user_name')->paginate(5);
         }
         else{
@@ -54,7 +54,7 @@ class DiscussionController extends Controller
         return view('discussions.usershow', ['discussions' => $discussions, 'categories' => $categories, 'users' => $users]);
     }
     public function solved($slug){
-        $discussion = Discussion::where('slug', $slug)->get()->first();
+        $discussion = Discussion::where('slug', $slug)->first();
         $discussion->update(['solved' => !$discussion->solved]);
         return $discussion;
     }
@@ -76,7 +76,7 @@ class DiscussionController extends Controller
         return redirect('/discussions');
     }
     public function vote($slug){
-        $discussion = Discussion::where('slug', $slug)->get()->first();
+        $discussion = Discussion::where('slug', $slug)->first();
         $user = User::findOrFail($discussion->user_id);
         if(request('vote') == 'up'){
             $discussion->increment('vote');
@@ -84,7 +84,7 @@ class DiscussionController extends Controller
         }
         else{
             $discussion->decrement('vote');
-            $user->deccrement('reputation', 20);
+            $user->decrement('reputation', 20);
         }
         return back();
     }
