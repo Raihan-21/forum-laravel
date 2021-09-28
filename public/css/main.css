@@ -5,6 +5,19 @@ body{
     background-color: white;
     height: 100%;
 }
+
+/* Navbar */
+#search{
+    border-radius: 2rem;
+    margin-left: .5rem;
+}
+#search img{
+    width: 1rem;
+
+}
+.navbar .container{
+    justify-content: space-between;
+}
 /* Forms */
 .error{
     color: rgb(255, 50, 50);

@@ -17,11 +17,15 @@ class DiscussionController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
     public function index(){
-        $users = DB::table('users')->orderBy('reputation', 'desc')->get(['name','reputation']);
+        $users = DB::table('users')->orderBy('reputation', 'desc')->get(['id','name','reputation']);
         $categories = DB::table('categories')->get();
         if(request('category')){
             $category = DB::table('categories')->where('name', request('category'))->first();
             $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('category_id', $category->id)->select('discussions.*', 'users.name as user_name')->paginate(5);
+        }
+        elseif(request('search')){
+            $category = DB::table('categories')->where('name', request('category'))->first();
+            $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('title', 'LIKE', '%' .request('search'). '%')->orWhere('content', 'LIKE', '%' .request('search'). '%')->select('discussions.*', 'users.name as user_name')->paginate(5);
         }
         else{
             $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->select('discussions.*', 'users.name as user_name')->paginate(5);
@@ -41,7 +45,7 @@ class DiscussionController extends Controller
     }
     public function users(){
         $categories = DB::table('categories')->get();
-        $users = User::orderBy('reputation', 'desc')->get(['name','reputation']);
+        $users = User::orderBy('reputation', 'desc')->get(['id','name','reputation']);
         $discussions = DB::table('discussions')->join('users', 'users.id', '=', 'discussions.user_id')->where('user_id', Auth::id())->get(['discussions.*', 'users.name as user_name']);
         if(request('sort')){
          if(request('sort') == 'Solved'){
